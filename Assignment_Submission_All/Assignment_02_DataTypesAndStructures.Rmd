@@ -1,0 +1,289 @@
+---
+title: "DataTypesAndDataStructures_Assignment_01"
+author: "Shoyeb_Khan_2021H1540806P"
+date: "27/09/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,echo = TRUE}
+
+library(stringi)
+
+##Exercise 1
+
+# Find the class and type of 'x' in the following cases:- 
+#1. x=22   // *Modify the code to create or declare an integer value.*  
+#2. y= 2    
+#   z=3  
+#   x=y>z   
+#3. x = 2i  
+#4. x="20-09-2021" 
+
+#1
+x <- as.integer(22)
+class(x)
+typeof(x)
+
+#2
+y <- as.integer(2)
+class(y)
+typeof(y)
+
+#3
+z <- as.integer(3)
+class(z)
+typeof(z)
+
+#4
+x<- y>z
+x
+class(x)
+typeof(x)
+
+#5
+z <- complex(real = 0 , imaginary = 2)
+class(z)
+typeof(z)
+
+#6
+#To change the format of the date , few adjustments are required. Following are 
+#those :
+  
+lct <- Sys.getlocale("LC_TIME"); 
+Sys.setlocale("LC_TIME", "C")
+
+p <- as.Date("2021-09-20",format= "%Y-%m-%d")
+class(p)
+typeof(p)
+
+
+### Exercise 2
+
+#1. Find the output when 1+2i is converted to character type  
+#2. Find output when "ProgrammingForAnalytics" is converted to numeric type
+#3. Given: x<-0:5, write code to output:  
+#   [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  (and)  
+#   [1] "0" "1" "2" "3" "4" "5" 
+#4. Given: x<-c("a","b","c")  
+#   Do all possible coercions to output [1] NA NA NA 
+
+#1
+cmp <- complex(real = 1 , imaginary = 2)
+cmp_ch <- as.character(cmp)
+cmp_ch
+class(cmp_ch)
+typeof(cmp_ch)
+
+#2 
+
+course <- as.character("ProgrammingForAnalytics")
+course_num <- as.numeric(course)
+course_num
+
+#3 
+
+x_n <- seq(0,5,1)
+
+x_n_loc <- as.logical(x_n)
+
+x_n_loc
+
+x_n_ch <- as.character(x_n)
+
+x_n_ch
+
+#4
+x<-c("a","b","c")  
+
+x_cor <- as.numeric(x)
+x_cor
+x_cor <- as.logical(x)
+x_cor
+x_cor <- as.integer(x)
+x_cor
+x_cor <- as.complex(x)
+x_cor
+
+
+### Exercise 3
+
+#Fill the table with your understanding of Data Structures (Atomic vector, List, Dataframe, Array, Matrix)
+
+###################################################################
+#|                |   Linear |   2 Dimensional   | N Dimensional |#
+#|----------------|----------|-------------------|---------------|#
+#|**Homogenous**  |  Vector  |     Matix         |     Array     |#
+#|                |          |                   |               |#
+#|**Heterogenous**|  List    |    DataFrame      |               |# 
+###################################################################
+
+### Exercise 4
+
+#Create a vector with a sequence of descending numbers from 20 to 0 in steps of 2. 
+
+#(i) Write code to access all except the 2nd to 5th elements.
+#(ii) Write code to access all numbers greater than 10 excluding the one at 2nd index.
+#(iii) Write code to change values of all elements less than 10 to 0.
+
+# (i) 
+num <- seq(0,20,2)
+num <- sort(num,decreasing = TRUE)
+
+num[-c(2,5)]
+
+#(ii)
+num_grt <- num[num > 10 ]
+
+num_grt <- num_grt[-c(2)]
+
+num_grt
+
+num_less <- num < 10
+num[num_less] <- 0
+
+num
+
+
+### Exercise 5   
+    
+#Create a matrix with 2 columns and 4 rows by passing a vector having 4 repetitions of 1 and 2 (i.e., 1,2,1,2,... use rep() #command). Arrange these elements in a row-wise manner.
+
+#(i) Write code to access the 2nd column of this matrix.  
+#(ii) Name the columns: "c1", "c2". Name the rows: "r1", "r2", "r3", "r4".  
+#(iii) Write code to access the 2nd row using its row name.  
+#(iv) Delete the first row
+
+col1_vec <- rep(1:2,8)
+col1_vec
+
+matrix_num <- matrix(col1_vec, nrow = 4  , ncol = 2 , byrow = TRUE)
+matrix_num 
+
+#(i)
+matrix_num[,2]
+
+#(ii)
+matrix_num_nam <- matrix(col1_vec, nrow = 4  , ncol = 2 , byrow = TRUE,
+                         dimnames = list(c("r1","r2","r3","r4"),c("c1","c2")))
+
+matrix_num_nam
+
+#(iii)
+matrix_num_nam["r2",c("c1","c2")]
+
+#(iV)
+matrix_num_nam <- matrix_num[-1,]
+matrix_num_nam
+
+
+### Exercise 6
+##(i) Create a vector "V" which contains 10 random integer values between -100 and +100. (hint:)
+##(ii) Create a two-dimensional 5×5 array "A" comprised of sequence of even integers greater than 25.
+##(iii) Create a list "S" containing sequence of 20 capital letters, starting with ‘C’.  
+
+##Create a list named "l" containing all the previously created objects. Name them "my_vector", "my_array"  and "my_list" ##respectively.  
+
+#(i) 
+v <- sample(-100:100,10)
+v
+
+#(ii)
+a_even <- array(seq(from = 26, length.out = 25 , by = 2),c(5,5))
+a_even
+
+#(iii)
+S <- LETTERS[match("C",LETTERS) : (match("C",LETTERS)+20)]
+S
+
+my_vector <- v 
+
+my_array <- a_even
+
+my_list <- S
+
+l <- c(my_vector,my_array,my_list)
+
+l
+
+##Without running any R command, answer the following questions pertaining to the exercise :-
+
+##1. How many elements are there in the list?
+# Ans : 56
+
+##2. what is the result of l[[3]]?
+# Ans : -25
+
+##3. How would you access random-th letter in the list element "my_list"?
+# Ans : Using the sample function i.e. sample(mylist,1)
+
+##4. If you convert list l to a vector, what will be the type of it’s elements?
+# Ans : character
+
+##5. Can this list be converted to an array? What will be the data type of elements in array?
+# Ans : Yes. data type will be character. 
+
+##6. How would you add a new element to this list?
+
+# Ans : using append function i.e. append(l,"5)
+
+
+### Exercise 7
+
+#Write a program to create a Data Frame by passing vectors for name (character), age (integer) and vaccinated (logical). 
+
+#1. Print the number of rows using dim().
+#2. Write code to change the age column into complex data type.
+#3. Use "as" function to check if data frame can be coerced into other data types or data structures.
+
+data_frame_det <- data.frame("Name:" = c("Michael Scott","Dwight Schrute","Pam Morgan Beasley"),
+                              "Age:"   = c(43,41,36),
+                              "Vaccinated:" = c(TRUE,TRUE,TRUE))
+
+dim(data_frame_det)
+
+
+data_frame_det$Age <- c(complex(real = 23 , imaginary = 1),complex(real = 21, imaginary = 2), 
+                        complex(real = 22 , imaginary = 3))
+
+
+other_data_ch_ty <-  as.character(data_frame_det)
+
+other_data_ch_ty
+
+other_data_lst_ty <- as.list(data_frame_det)
+
+other_data_lst_ty
+
+other_data_vct_ty <- as.vector(data_frame_det)
+
+other_data_vct_ty
+
+### Exercise 8
+
+#Debug the following and run the correct code  
+#1. num = c(1, 2, 3, 4, 5)  
+#   name = c("one", "two", "four", "five")  
+#   df = data.frame(num,name)  
+#   print(df)  
+#2. x = c(1, "BITS", 5, 7.2, True, 1+i)  
+#   print(X)
+
+#1. Corrected Code
+num = c(1, 2, 3, 4, 5)
+
+name = c("one", "two", "three", "four","five")  
+
+df = data.frame(num,name) 
+
+print(df)
+
+#2. 
+x= c(1, "BITS", 5, 7.2, TRUE, complex(real = 1 , imaginary = 1))  
+print(x)
+
+```
+
